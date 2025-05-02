@@ -19,7 +19,7 @@ function updateCounter() {
 updateCounter();
 
 // Add change listener to update the UI when the store changes
-counterStore.subscribeToCounterChanges(updateCounter);
+counterStore.on(updateCounter);
 
 // Add event listeners to buttons
 if (upButton) {

@@ -6,6 +6,12 @@ class CounterStore extends EventEmitter {
   private readonly CHANGE_EVENT = 'COUNTER_CHANGED';
   private _counter: number = 0;
 
+  constructor() {
+    super();
+    // Register store with dispatcher
+    AppDispatcher.register(this.handleActions.bind(this));
+  }
+
   getCounter(): number {
     return this._counter;
   }
@@ -24,33 +30,29 @@ class CounterStore extends EventEmitter {
     this.notifyCounterChanged();
   }
 
-  subscribeToCounterChanges(callback: () => void): void {
-    this.on(this.CHANGE_EVENT, callback);
-  }
-
-  unsubscribeFromCounterChanges(callback: () => void): void {
-    this.removeListener(this.CHANGE_EVENT, callback);
+  // @ts-ignore
+  on(callback: () => void): void {
+    super.on(this.CHANGE_EVENT, callback);
   }
 
   private notifyCounterChanged(): void {
     this.emit(this.CHANGE_EVENT);
   }
+
+  private handleActions(action: any): void {
+    switch (action.actionType) {
+      case ActionTypes.INCREMENT_COUNTER:
+        this.increment();
+        break;
+      case ActionTypes.DECREMENT_COUNTER:
+        this.decrement();
+        break;
+      default:
+        // no op
+    }
+  }
 }
 
 const counterStore = new CounterStore();
-
-// Register store with dispatcher
-AppDispatcher.register((action) => {
-  switch (action.actionType) {
-    case ActionTypes.INCREMENT_COUNTER:
-      counterStore.increment();
-      break;
-    case ActionTypes.DECREMENT_COUNTER:
-      counterStore.decrement();
-      break;
-    default:
-      // no op
-  }
-});
 
 export { CounterStore, counterStore };
