@@ -1,0 +1,35 @@
+{
+  "name": "learn-flux-sample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc && webpack",
+    "build:node": "tsc",
+    "build:browser": "webpack",
+    "start": "node dist/index.js",
+    "dev": "tsc -w",
+    "serve": "npx http-server -o",
+    "dev:server": "webpack serve"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "flux": "^4.0.4",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@types/flux": "^3.1.14",
+    "@types/node": "^22.15.3",
+    "css-loader": "^6.8.1",
+    "http-server": "^14.1.1",
+    "sass": "^1.69.5",
+    "sass-loader": "^13.3.2",
+    "style-loader": "^3.3.3",
+    "ts-loader": "^9.5.2",
+    "webpack": "^5.99.7",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.1"
+  }
+}
