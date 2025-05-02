@@ -9,7 +9,7 @@ console.log('Flux library is installed and ready to use!');
 console.log(`Initial counter value: ${counterStore.getCounter()}`);
 
 // Add change listener
-counterStore.subscribeToCounterChanges(() => {
+counterStore.on(() => {
   console.log(`Counter updated: ${counterStore.getCounter()}`);
 });
 
